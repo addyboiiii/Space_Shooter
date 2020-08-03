@@ -14,6 +14,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float tilt;
 
+    [SerializeField]
+    GameObject shot, shot_spawn;
+
+    [SerializeField]
+    float fire_rate;
+    float next_fire = 0.0f;
+
+    private void Update()
+    {
+        if (Input.GetAxis("Fire1") > 0 && Time.time > next_fire)
+        {
+            next_fire = Time.time + fire_rate;
+            Instantiate(shot, shot_spawn.transform);
+        }
+    }
+
     private void FixedUpdate()
     {
         float move_horizontal = Input.GetAxis("Horizontal");
