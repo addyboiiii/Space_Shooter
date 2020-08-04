@@ -8,7 +8,10 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     [SerializeField]
-    GameObject hazard, score_text, restart_text, game_over_text;
+    GameObject[] hazards;
+
+    [SerializeField]
+    GameObject score_text, restart_text, game_over_text;
 
     bool game_over, restart;
 
@@ -52,6 +55,7 @@ public class GameController : MonoBehaviour
             {
                 Vector3 spawn_position = new Vector3(Random.Range(-spawn_value.x, spawn_value.x), spawn_value.y, spawn_value.z);
                 Quaternion spawn_rotation = Quaternion.identity;
+                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Instantiate(hazard, spawn_position, spawn_rotation);
                 yield return new WaitForSeconds(spawn_wait);
             }
